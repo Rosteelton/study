@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <style>
+        body {
+            padding-bottom: 10px;
+            text-align: center;
+        }
+        form {
+            display: inline-block;
+        }
+        #output {
+            padding: 20px;
+            text-align: center;
+            height: 60px;
+            line-height: 60px;
+        }
+    </style>
+
+    <script src="https://widget.cloudpayments.ru/bundles/checkout"></script>
+    <script>
+
+        function createCryptogram() {
+            var output = document.getElementById('output');
+
+            console.log(arguments);
+            var checkout = new cp.Checkout(
+                    // public id из личного кабинета
+                    "pk_c99781103173ac481f50bd0e19a9d",
+                    // тег, содержащий поля данными карты
+                    document.getElementById("paymentFormSample"));
+
+            var result = checkout.createCryptogramPacket();
+
+            if (result.success) {
+                // сформирована криптограмма
+                console.log(result);
+                output.innerText = result.packet;
+                debugger;
+            }
+            else {
+                // найдены ошибки в ведённых данных, объект `result.messages` формата:
+                // { name: "В имени держателя карты слишком много символов", cardNumber: "Неправильный номер карты" }
+                // где `name`, `cardNumber` соответствуют значениям атрибутов `<input ... data-cp="cardNumber">`
+                for (var msgName in result.messages) {
+                    alert(result.messages[msgName]);
+                }
+            }
+            return false;
+        };
+    </script>
+</head>
+<body>
+
+<form id="paymentFormSample" autocomplete="off">
+    <div><label>cardNumber: <input type="text" value="4405036100992384" data-cp="cardNumber"></label></div>
+    <div><label>expDateMonthL: <input type="text" value="02" data-cp="expDateMonth"></label></div>
+    <div><label>expDateYear: <input type="text" value="19" data-cp="expDateYear"></label></div>
+    <div><label>cvv: <input type="text" value="291" data-cp="cvv"></label></div>
+    <div><label>name: <input type="text" value="anton solovyev" data-cp="name"></label></div>
+    <button type="button" onclick="createCryptogram()">Create Cryptogram</button>
+</form>
+
+<div id="output"></div>
+
+
+</body>
+</html>
