@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Crypto create</title>
+
+    <style>
+        body {
+            padding-bottom: 30px;
+            padding-left: 35%;
+        }
+
+        header {
+            padding-bottom: 2px
+        }
+
+        #div_form {
+            width: 50%;
+        }
+
+        #cryptogram {
+            width: 50%;
+            height: 200px;
+            resize: none;
+        }
+
+        #payment_form ul {
+            list-style: none outside;
+            padding: 0;
+        }
+
+        #payment_form li {
+            padding: 5px;
+            border-bottom: 1px solid #fbedff;
+
+        }
+
+        #payment_form label {
+            width: 150px;
+            margin-top: 3px;
+            float: left;
+            padding: 3px;
+        }
+
+        h2 {
+            text-decoration: underline;
+        }
+
+        button {
+            padding: 10px;
+            width: 300px;
+
+            text-decoration: none;
+            text-align: center;
+            border: solid 1px #004F72;
+            -webkit-border-radius: 4px;
+            -moz-border-radius: 4px;
+            border-radius: 4px;
+            font: 16px Georgia, "Times New Roman", Times, serif;
+            font-weight: bold;
+            color: #283636;
+            background-color: #f7fdff;
+            background-image: -moz-linear-gradient(top, #f7fdff 0%, #def7ff 100%);
+            background-image: -webkit-linear-gradient(top, #f7fdff 0%, #def7ff 100%);
+            background-image: -o-linear-gradient(top, #f7fdff 0%, #def7ff 100%);
+            background-image: -ms-linear-gradient(top, #f7fdff 0%, #def7ff 100%);
+            filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#def7ff', endColorstr='#def7ff', GradientType=0);
+            background-image: linear-gradient(top, #f7fdff 0%, #def7ff 100%);
+            -webkit-box-shadow: 0px 0px 2px #bababa, inset 0px 0px 1px #ffffff;
+            -moz-box-shadow: 0px 0px 2px #bababa, inset 0px 0px 1px #ffffff;
+            box-shadow: 0px 0px 2px #bababa, inset 0px 0px 1px #ffffff;
+        }
+
+        #output {
+            padding-top: 50px;
+        }
+
+        #payment_form input {
+            height: 20px;
+            width: 220px;
+            padding: 5px 8px;
+        }
+    </style>
+
+    <script src="https://widget.cloudpayments.ru/bundles/checkout"></script>
+    <script src="https://cdn.jsdelivr.net/clipboard.js/1.5.12/clipboard.min.js"></script>
+    <script>
+        function createCryptogram() {
+            var output = document.getElementById('cryptogram');
+
+            console.log(arguments);
+            var checkout = new cp.Checkout(
+                    // public id из личного кабинета
+                    "pk_be3284fc9bdc60193e2dd94c717e5",
+                    // тег, содержащий поля данными карты
+                    document.getElementById("payment_form"));
+
+            var result = checkout.createCryptogramPacket();
+            if (result.success) {
+                // сформирована криптограмма
+                console.log(result);
+                output.value = result.packet;
+            }
+            else {
+                for (var msgName in result.messages) {
+                    alert(result.messages[msgName]);
+                }
+            }
+            return false;
+        }
+    </script>
+
+
+</head>
+<header>
+
+    <h2>Формирование криптограммы</h2>
+
+</header>
+<body>
+
+<div id=div_form>
+    <form id="payment_form" autocomplete="off">
+        <ul>
+            <li>
+                <label>Номер карты</label>
+                <input type="text" value="4405036100992384" data-cp="cardNumber"/>
+            </li>
+            <li>
+                <label>До (месяц)</label>
+                <input type="text" value="02" data-cp="expDateMonth">
+            </li>
+            <li>
+                <label>До (год)</label>
+                <input type="text" value="19" data-cp="expDateYear">
+            </li>
+            <li>
+                <label>CVV</label>
+                <input type="text" value="291" data-cp="cvv">
+            </li>
+            <li>
+                <label>Имя</label>
+                <input type="text" value="anton solovyev" data-cp="name">
+            </li>
+            <p>
+                <button type="button" onclick="createCryptogram()">Сформировать криптограмму!</button>
+            </p>
+        </ul>
+    </form>
+</div>
+<div id="output">
+    <p>
+        <textarea id="cryptogram" readonly></textarea>
+    </p>
+    <p>
+        <button class="btn" data-clipboard-target="#cryptogram">
+            Скопировать!
+        </button>
+    </p>
+</div>
+
+<script>
+    new Clipboard('.btn');
+</script>
+
+</body>
+</html>

@@ -1,4 +1,4 @@
-package freeMonads.ex1
+package differentTasks.freeMonads
 
 import cats.free.Free
 import cats.implicits._

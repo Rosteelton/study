@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SBER</title>
+</head>
+<body>
+<form action="" id="formBinding" >
+    <table cellpadding="10">
+        <tbody>
+        <tr valign="TOP">
+            <td valign="top" width="50%" align="right">
+                <span>Выберите карту:</span>
+            </td>
+            <td valign="top">
+                <label>
+                    <select name="bindingId">
+                        <option value="" selected="selected">другая</option>
+                    </select>
+                </label>
+            </td>
+        </tr>
+        <tr class="rbs_hidden">
+            <td align="right">
+                <span>Введите CVC2/CVV2 код :</span><br>(находится на обратной стороне карты)
+            </td>
+            <td>
+                <label>
+                    <input name="cvc" maxlength="4" type="password" autocomplete="off"/>
+                </label>
+            </td>
+        </tr>
+        <tr class="rbs_hidden">
+            <td> </td>
+            <td valign="top" >
+                <input value="Оплатить" type="button" id="buttonBindingPayment">
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</form>
+
+
+
+</body>
+</html>

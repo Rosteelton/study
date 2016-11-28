@@ -1,4 +1,4 @@
-package akkaHttpWebSocket
+package differentTasks.akkaHttpWebSocket
 
 import akka.NotUsed
 import akka.http.scaladsl.Http
