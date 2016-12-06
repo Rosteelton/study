@@ -1,0 +1,5 @@
+.gitignore
+.idea/
+project/
+src/test/
+target/
