@@ -2,7 +2,7 @@ package differentTasks.akkaExamples.akkaActor
 
 import akka.actor._
 
-object App{
+object App {
 
   case class Greet(name: String)
 
