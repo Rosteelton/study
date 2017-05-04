@@ -25,12 +25,12 @@ object Chat {
 
   def chatFlow(sender: String): Flow[String, ChatMessage, Any] = {
 
-    val in: Sink[String, NotUsed] = Flow[String].map(MessageReceived(sender, _)).to(Sink.actorRef[ChatEvent](chatActor, UserLeft(sender)))
+    val sink: Sink[String, NotUsed] = Flow[String].map(MessageReceived(sender, _)).to(Sink.actorRef[ChatEvent](chatActor, UserLeft(sender)))
 
-    val out: Source[ChatMessage, Unit] = Source.actorRef[ChatMessage](1, OverflowStrategy.fail)
+    val source: Source[ChatMessage, Unit] = Source.actorRef[ChatMessage](1, OverflowStrategy.fail)
       .mapMaterializedValue(chatActor ! UserJoined(sender, _))
 
-    Flow.fromSinkAndSource(in, out)
+    Flow.fromSinkAndSource(sink, source)
   }
 
 

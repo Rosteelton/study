@@ -1,45 +1,51 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
+import java.util.List;
 
+/*
+Проверка на упорядоченность
+*/
 public class Solution {
-    public static void main(String[] args)
-    {
-        ArrayList<String> list = new ArrayList<>(100);
+    public static void main(String[] args) throws IOException {
+        //напишите тут ваш код
 
-        list.add("123");
-        list.add("12");
-        list.add("123");
-        list.add("12");
+        List<String> list = new ArrayList<>();
 
-        list.sort(new MyComparator());
+        for (int i = 0; i < 10; i++) {
 
-        int maxLength = list.get(0).length();
+            BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
-        list.forEach((string) -> {
-            if (string.length() == maxLength) System.out.println(string);
-        });
+            list.add(reader.readLine());
 
+        }
 
-        //System.out.println(list.get(0).length() - list.get(1).length());
-//        for (int i = 0; i < list.size(); i++) {
-//            if (list.get(i).length() == maxLength) {
-//                System.out.println(list.get(i));
-//            } else {
-//                break;
-//            }
-//        }
+        for (int i = 0; i < list.size()-1; i++) {
+
+            if (!compareString(list.get(i), list.get(i + 1))) {
+
+                System.out.println(list.get(i + 1));
+                break;
+
+            }
+
+        }
     }
 
-    public static class MyComparator implements Comparator<String> {
-        @Override
-        public int compare(String o1, String o2) {
-            if (o2.length()> o1.length()) return 1;
-            else if (o1.length()< o2.length()) return -1;
-            else return 0;
 
-           // return o2.length() - o1.length();
+    public static boolean compareString(String s1, String s2) {
+        if (s1.length() <= s2.length()) {
+            return true;
+        } else {
+            return false;
         }
     }
 }
+
+
+//
+//    Проверка на упорядоченность
+//        1. Введи с клавиатуры 10 слов в список строк.
+//        2. Определить, является ли список упорядоченным по возрастанию длины строки.
+//        3. В случае отрицательного ответа вывести на экран номер первого элемента, нарушающего такую упорядоченность.
