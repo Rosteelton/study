@@ -1,4 +1,4 @@
-package TinTasks
+package hhTasks
 
 object Spiral extends App {
 
