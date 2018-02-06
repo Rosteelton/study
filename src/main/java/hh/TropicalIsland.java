@@ -40,7 +40,6 @@ public class TropicalIsland {
                             }
                             isChanged = true;
                         }
-
                     }
                 }
             }
@@ -88,11 +87,25 @@ public class TropicalIsland {
                 {2, 1, 2}
         };
 
+        final Integer[][] matrix4 = {
+                {2, 2, 2}
+        };
+
+        final Integer[][] matrix5 = {
+                {6,5,3,1,8},
+                {7,2,1,9,7},
+                {4,5,6,7,6} ,
+                {8,3,1,1,4} ,
+                {7,8,2,3,5} ,
+        };
+
         TropicalIsland island1 = new TropicalIsland();
 
         System.out.println(island1.getWaterVolume(matrix1));
         System.out.println(island1.getWaterVolume(matrix2));
         System.out.println(island1.getWaterVolume(matrix3));
+        System.out.println(island1.getWaterVolume(matrix4));
+        System.out.println(island1.getWaterVolume(matrix5));
     }
 
 }
