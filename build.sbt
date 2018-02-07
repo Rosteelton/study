@@ -16,6 +16,7 @@ libraryDependencies ++= Seq(
   "com.typesafe.akka" %% "akka-stream" % "2.4.9",
   "org.typelevel" %% "cats" % "0.8.1",
   "com.datastax.cassandra" % "cassandra-driver-core" % "3.1.0",
+  "io.getquill" %% "quill-cassandra" % "2.3.2",
   doobieCore,
   doobiePostgresql
 )
