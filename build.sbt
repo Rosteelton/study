@@ -8,6 +8,8 @@ lazy val doobieVersion = "0.3.1-M1"
 
 lazy val doobieCore = "org.tpolecat" %% "doobie-core-cats" % doobieVersion
 lazy val doobiePostgresql = "org.tpolecat" %% "doobie-postgres-cats" % doobieVersion
+lazy val scalaCheckVersion = "1.13.4"
+lazy val scalaTestVersion = "3.0.3"
 
 libraryDependencies ++= Seq(
   "com.typesafe.akka" %% "akka-http-experimental" % "2.4.9",
@@ -18,7 +20,11 @@ libraryDependencies ++= Seq(
   "com.datastax.cassandra" % "cassandra-driver-core" % "3.1.0",
   "io.getquill" %% "quill-cassandra" % "2.3.2",
   doobieCore,
-  doobiePostgresql
+  doobiePostgresql,
+  "org.scalacheck" %% "scalacheck" % scalaCheckVersion % Test,
+  "org.scalatest" %% "scalatest" % scalaTestVersion % Test,
+  "com.dimafeng" %% "testcontainers-scala" % "0.13.0" % Test,
+  "org.scalamock" %% "scalamock" % "4.0.0" % Test
 )
 
 resolvers ++= Seq(
